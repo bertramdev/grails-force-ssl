@@ -7,7 +7,7 @@ class ForceSslGrailsPlugin {
     def title = "Force SSL Plugin" // Headline display name of the plugin
     def author = "David Estes"
     def authorEmail = "destes@bcap.com"
-    def description = 'Defines a standard corss-plugin security bridge implementation for better decoupling of authentication in plugin heavy applications.'
+    def description = 'Creates a simple annotation to mark controller/actions as SSL restricted and performs the appropriate redirect.'
 
     def documentation   = "https://github.com/bertramdev/grails-force-ssl"
     def license = "APACHE"
