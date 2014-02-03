@@ -7,6 +7,6 @@ import java.lang.annotation.Retention
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SSL {
+public @interface SSLRequired {
 	String forced() default "true"
 }

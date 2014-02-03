@@ -17,11 +17,11 @@ Usage
 Simply import the SSL annotation and apply at the controller level or at the annotation level.
 
 ```groovy
-import com.bertramlabs.plugins.SSL
+import com.bertramlabs.plugins.SSLRequired
 
-@SSL //Will encrypt entire controller
+@SSLRequired //Will encrypt entire controller
 class SessionController {
-  @SSL //Or here for action level
+  @SSLRequired //Or here for action level
 	def signin() {
     //Signing Code Here
   }

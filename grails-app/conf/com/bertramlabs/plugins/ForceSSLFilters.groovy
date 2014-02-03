@@ -16,7 +16,7 @@ class ForceSSLFilters {
 
                 def method = controller.clazz.declaredMethods.find { it.name == actionName }
 
-                def annotation = method?.getAnnotation(SSL) ?: controller.clazz.getAnnotation(SSL)
+                def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
 
                 if(!annotation) {
                     return true
