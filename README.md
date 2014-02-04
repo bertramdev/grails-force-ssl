@@ -16,10 +16,10 @@ The enabled flag can also be defined as a closure which will get passed the requ
 
 ```groovy
 grails.plugin.forceSSL.enabled = { request ->
-	if(request.serverName == 'app1.bertramlabs.com') {
-		return false
-	}
-	return true
+  if(request.serverName == 'app1.bertramlabs.com') {
+    return false
+  }
+  return true
 }
 ```
 
@@ -33,8 +33,8 @@ import com.bertramlabs.plugins.SSLRequired
 @SSLRequired //Will encrypt entire controller
 class SessionController {
   @SSLRequired //Or here for action level
-	def signin() {
-    //Signing Code Here
+  def signin() {
+    //Signin Code Here
   }
 }
 ```
