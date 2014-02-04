@@ -5,7 +5,9 @@ class ForceSSLFilters {
     def filters = {
         all(controller:'*', action:'*') {
             before = {
-                if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
+                if(grailsApplication.config.grails.plugin.forceSSL.enabled instanceof Closure) {
+                    return !grailsApplication.config.grails.plugin.forceSSL.enabled(request)
+                } else if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
                     return true
                 }
                 def controller = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)

@@ -12,6 +12,17 @@ By default, the SSL plugin is enabled for all environments, with the exception o
 grails.plugin.forceSSL.enabled = false
 ```
 
+The enabled flag can also be defined as a closure which will get passed the request attribute. This allows for evaluation on a per requeset level as to wether or not SSL should be enforced. Can be rather useful for disabling forced SSL for certain URL endpoints (for example server endpoints not behind a load balancer).
+
+```groovy
+grails.plugin.forceSSL.enabled = { request ->
+	if(request.serverName == 'app1.bertramlabs.com') {
+		return false
+	}
+	return true
+}
+```
+
 Usage
 -----
 Simply import the SSL annotation and apply at the controller level or at the annotation level.
