@@ -1,0 +1,19 @@
+<plugin name='force-ssl' version='0.1.1' grailsVersion='2.0 &gt; *'>
+  <author>David Estes</author>
+  <authorEmail>destes@bcap.com</authorEmail>
+  <title>Force SSL Plugin</title>
+  <description>Creates a simple annotation to mark controller/actions as SSL restricted and performs the appropriate redirect.</description>
+  <documentation>https://github.com/bertramdev/grails-force-ssl</documentation>
+  <type>ForceSslGrailsPlugin</type>
+  <resources>
+    <resource>com.bertramlabs.plugins.ForceSSLFilters</resource>
+  </resources>
+  <repositories>
+    <repository name='grailsCentral' url='http://grails.org/plugins' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
+  </repositories>
+  <dependencies />
+  <plugins />
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>

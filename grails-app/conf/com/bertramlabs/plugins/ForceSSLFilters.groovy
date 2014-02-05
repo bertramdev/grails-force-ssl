@@ -6,7 +6,9 @@ class ForceSSLFilters {
         all(controller:'*', action:'*') {
             before = {
                 if(grailsApplication.config.grails.plugin.forceSSL.enabled instanceof Closure) {
-                    return !grailsApplication.config.grails.plugin.forceSSL.enabled(request)
+                    if (!grailsApplication.config.grails.plugin.forceSSL.enabled(request)) {
+                        return true
+                    }
                 } else if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
                     return true
                 }
