@@ -2,7 +2,7 @@ import grails.util.Environment
 
 class ForceSslGrailsPlugin {
     // the plugin version
-    def version = "0.1.2"
+    def version = "1.0.0"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion   = "2.0 > *"
 

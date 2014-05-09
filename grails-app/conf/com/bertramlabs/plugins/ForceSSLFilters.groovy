@@ -28,6 +28,10 @@ class ForceSSLFilters {
 
                 if(!(request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https')) {
                     log.info("Forcing SSL Redirect To https://${request.serverName}${request.forwardURI}")
+                    //Persist Flash Scope
+                    flash.keySet().each { key ->
+                        flash[key] = flash[key]
+                    }
                     redirect url: "https://${request.serverName}${request.forwardURI}"
                     return false
                 }
