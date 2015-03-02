@@ -1,0 +1,53 @@
+package com.bertramlabs.plugins
+
+import grails.core.GrailsApplication
+
+class ForceSSLInterceptor {
+	GrailsApplication grailsApplication
+
+	int order = HIGHEST_PRECEDENCE
+
+	ForceSSLInterceptor() {
+		matchAll()
+	}
+
+	boolean before() { 
+		if(grailsApplication.config.grails.plugin.forceSSL.enabled instanceof Closure) {
+			if (!grailsApplication.config.grails.plugin.forceSSL.enabled(request)) {
+					return true
+			}
+			} else if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
+					return true
+			}
+			def controller = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
+
+			if(!controller) {
+					return true
+			}
+
+			def method = controller.clazz.declaredMethods.find { it.name == actionName }
+
+			def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
+
+			if(!annotation) {
+					return true
+			}
+
+		if(!(request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https')) {
+			log.info("Forcing SSL Redirect To https://${request.serverName}${request.requestURI}")
+			//Persist Flash Scope
+			flash.keySet().each { key ->
+					flash[key] = flash[key]
+			}
+			redirect url: "https://${request.serverName}${request.requestURI}"
+			return false
+		}
+	}
+
+	boolean after() { true }
+
+	void afterView() {
+		// no-op
+	}
+
+}
