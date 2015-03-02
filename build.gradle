@@ -68,6 +68,15 @@ dependencies {
   console "org.grails:grails-console"
 }
 
+bintray {
+    publications = ['maven']
+    pkg {
+        repo = 'grails3-plugins'
+        userOrg = 'bertramlabs'
+        licenses = ['Apache-2.0']
+    }
+}
+
 eclipse {
     classpath {
         plusConfigurations += [configurations.provided]
