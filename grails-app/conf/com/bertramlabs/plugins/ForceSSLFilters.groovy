@@ -22,8 +22,17 @@ class ForceSSLFilters {
 
                 def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
 
-                if(!annotation) {
+                if(annotation == null || (annotation.forced().toLowerCase() != "true"  && 
+                  grailsApplication.config.grails.plugin.forceSSL."$controllerName" != true && 
+                  grailsApplication.config.grails.plugin.forceSSL."$controllerName"."$actionName" != true)) {
                     return true
+                }
+                if(!(request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https')) {
+                    log.info("Forcing SSL Redirect To https://${request.serverName}${request.forwardURI}${request.forwardURI}${request.getQueryString() ? '?'+request.getQueryString() :''}")
+                    //Persist Flash Scope
+                    flash.keySet().each { key -> flash[key] = flash[key]}
+                    redirect url: "https://${request.serverName}${request.forwardURI}${request.forwardURI}${request.getQueryString() ? '?'+request.getQueryString() :''}"
+                    return false
                 }
 
                 if(!(request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https')) {
