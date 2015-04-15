@@ -1,4 +1,4 @@
-<plugin name='force-ssl' version='0.1.1' grailsVersion='2.0 &gt; *'>
+<plugin name='force-ssl' version='1.0.2' grailsVersion='2.0 &gt; *'>
   <author>David Estes</author>
   <authorEmail>destes@bcap.com</authorEmail>
   <title>Force SSL Plugin</title>
@@ -8,12 +8,4 @@
   <resources>
     <resource>com.bertramlabs.plugins.ForceSSLFilters</resource>
   </resources>
-  <repositories>
-    <repository name='grailsCentral' url='http://grails.org/plugins' />
-    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
-  </repositories>
-  <dependencies />
-  <plugins />
-  <runtimePluginRequirements />
-  <behavior />
 </plugin>
