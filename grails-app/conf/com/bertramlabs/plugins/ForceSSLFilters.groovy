@@ -31,7 +31,7 @@ class ForceSSLFilters {
                     log.info("Forcing SSL Redirect To https://${request.serverName}${request.forwardURI}${request.getQueryString() ? '?'+request.getQueryString() :''}")
                     //Persist Flash Scope
                     flash.keySet().each { key -> flash[key] = flash[key]}
-                    redirect url: "https://${request.serverName}${request.forwardURI}${request.forwardURI}${request.getQueryString() ? '?'+request.getQueryString() :''}"
+                    redirect url: "https://${request.serverName}${request.forwardURI}${request.getQueryString() ? '?'+request.getQueryString() :''}"
                     return false
                 }
             }
