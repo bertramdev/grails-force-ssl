@@ -38,3 +38,19 @@ class SessionController {
   }
 }
 ```
+
+Another option is to use a configuration mapping to identify which controllers you wish to be restricted to SSL:
+
+```groovy
+  grails {
+    plugin {
+      forceSSL {
+        enabled = true
+        dashboard {
+          index = true
+        }
+        home = true
+      }
+    }       
+  }
+```
