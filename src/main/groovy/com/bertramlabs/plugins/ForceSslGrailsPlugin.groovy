@@ -4,7 +4,7 @@ import grails.util.Environment
 import grails.plugins.*
 
 class ForceSslGrailsPlugin extends Plugin {
-    def grailsVersion   = "3.0.0.M2 > *"
+    def grailsVersion   = "3.1.0 > *"
 
     def title = "Force SSL Plugin" // Headline display name of the plugin
     def author = "David Estes"

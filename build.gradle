@@ -8,7 +8,6 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.1.1'
     }
 }
 
@@ -21,15 +20,16 @@ version "3.0.0"
 group "com.bertramlabs.plugins"
 
 apply plugin: "spring-boot"
-apply plugin: "asset-pipeline"
 apply plugin: "org.grails.grails-plugin"
 apply plugin: "org.grails.grails-gsp"
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: "org.grails.grails-plugin"
+apply plugin: "org.grails.grails-plugin-publish"
 // Used for publishing to central repository, remove if not needed
-apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
-apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
+// apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
+// apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
 
 ext {
   grailsVersion = project.grailsVersion
@@ -70,11 +70,29 @@ dependencies {
 
 bintray {
     publications = ['maven']
+    name = 'force-ssl'
     pkg {
+        githubRepo = 'bertramdev/grails-force-ssl' //Optional Github repository
+        githubReleaseNotesFile = 'README.md' //Optional Github readme file
         repo = 'grails3-plugins'
         userOrg = 'bertramlabs'
         licenses = ['Apache-2.0']
     }
+}
+
+grailsPublish {
+  if(project.hasProperty('bintrayUser')) {
+    user = bintrayUser
+    key = bintrayKey
+  }
+  userOrg = 'bertramlabs'
+    githubSlug = 'bertramdev/grails-force-ssl'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "Force SSL"
+    desc = "Creates a simple annotation to mark controller/actions as SSL restricted and performs the appropriate redirect."
+    developers = [davidestes:"David Estes", jleng: "Jeremy Leng"]
 }
 
 eclipse {
