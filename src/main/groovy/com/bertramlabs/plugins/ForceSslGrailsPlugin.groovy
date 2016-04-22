@@ -1,10 +1,10 @@
-import grails.util.Environment
+package com.bertramlabs.plugins
 
-class ForceSslGrailsPlugin {
-    // the plugin version
-    def version = "1.0.3"
-    // the version or versions of Grails the plugin is designed for
-    def grailsVersion   = "2.0 > *"
+import grails.util.Environment
+import grails.plugins.*
+
+class ForceSslGrailsPlugin extends Plugin {
+    def grailsVersion   = "3.1.0 > *"
 
     def title = "Force SSL Plugin" // Headline display name of the plugin
     def author = "David Estes"
@@ -20,8 +20,8 @@ class ForceSslGrailsPlugin {
     def issueManagement = [system: "GITHUB", url: "https://github.com/bertramdev/grails-force-ssl/issues"]
     def scm = [url: "https://github.com/bertramdev/grails-force-ssl"]
     def doWithSpring = {
-        if(!application.config.grails.plugin.forceSSL.containsKey('enabled')) {
-            application.config.grails.plugin.forceSSL.enabled = !Environment.isDevelopmentMode()
+        if(!grailsApplication.config.grails.plugin.forceSSL.containsKey('enabled')) {
+            grailsApplication.config.grails.plugin.forceSSL.enabled = !Environment.isDevelopmentMode()
         }
     }
 }

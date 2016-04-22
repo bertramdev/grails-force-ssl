@@ -1,4 +1,9 @@
 .DS_Store
 target/
+build/
+.gradle/
 log/
 *.zip
+*.iml
+*.ipr
+*.iws
