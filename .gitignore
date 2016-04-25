@@ -3,6 +3,7 @@ target/
 build/
 .gradle/
 log/
+plugin.xml
 *.zip
 *.iml
 *.ipr

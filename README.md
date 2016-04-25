@@ -32,6 +32,12 @@ grails.plugin.forceSSL.enabled = { request ->
 }
 ```
 
+It is also possible to override the https port for the redirect if you want to via:
+
+```groovy
+grails.plugin.forceSSL.sslPort = 6443 //optional
+```
+
 Usage
 -----
 Simply import the SSL annotation and apply at the controller level or at the annotation level.

@@ -40,7 +40,12 @@ class ForceSSLInterceptor {
 			flash.keySet().each { key ->
 					flash[key] = flash[key]
 			}
-			redirect url: "https://${request.serverName}${request.requestURI}"
+			if(grailsApplication.config.grails.plugin.forceSSL.sslPort) {
+				redirect url: "https://${request.serverName}:${grailsApplication.config.grails.plugin.forceSSL.sslPort}${request.requestURI}"
+            } else {
+                redirect url: "https://${request.serverName}${request.requestURI}"
+            }
+			
 			return false
 		}
 	}
