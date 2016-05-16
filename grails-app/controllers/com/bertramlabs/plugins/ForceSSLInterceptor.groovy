@@ -48,6 +48,7 @@ class ForceSSLInterceptor {
 			
 			return false
 		}
+		return true
 	}
 
 	boolean after() { true }
