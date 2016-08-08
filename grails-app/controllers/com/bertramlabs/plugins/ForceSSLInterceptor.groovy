@@ -29,9 +29,11 @@ class ForceSSLInterceptor {
 			def method = controller.clazz.declaredMethods.find { it.name == actionName }
 
 			def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
-
+			
 			if(!annotation) {
+				if(!grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap ||  grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap[request.requestURI] != true) {
 					return true
+				}
 			}
 
 		if(!(request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https')) {
