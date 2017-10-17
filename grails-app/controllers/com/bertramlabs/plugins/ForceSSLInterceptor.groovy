@@ -17,25 +17,25 @@ class ForceSSLInterceptor {
 			if (!grailsApplication.config.grails.plugin.forceSSL.enabled(request)) {
 					return true
 			}
-			} else if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
-					return true
+		} else if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
+				return true
+		}
+		def controller = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
+
+		if(!controller) {
+				return true
+		}
+
+		def method = controller.clazz.declaredMethods.find { it.name == actionName }
+
+		def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
+		
+		if(!annotation) {
+			if(!grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap ||  grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap[request.requestURI] != true) {
+				return true
 			}
-			def controller = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
-
-			if(!controller) {
-					return true
-			}
-
-			def method = controller.clazz.declaredMethods.find { it.name == actionName }
-
-			def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
-			
-			if(!annotation) {
-				if(!grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap ||  grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap[request.requestURI] != true) {
-					return true
-				}
-			}
-
+		}
+		response.setHeader('Strict-Transport-Security','max-age=31536000')
 		if(!(request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https')) {
 			log.info("Forcing SSL Redirect To https://${request.serverName}${request.requestURI}")
 			//Persist Flash Scope
