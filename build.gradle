@@ -148,19 +148,3 @@ tasks.withType(io.github.gradlenexus.publishplugin.InitializeNexusStagingReposit
 
 
 
-// grailsPublish {
-//   if(project.hasProperty('bintrayUser')) {
-//     user = bintrayUser
-//     key = bintrayKey
-//   }
-//   userOrg = 'bertramlabs'
-//     githubSlug = 'bertramdev/grails-force-ssl'
-//     license {
-//         name = 'Apache-2.0'
-//     }
-//     title = "Force SSL"
-//     desc = "Creates a simple annotation to mark controller/actions as SSL restricted and performs the appropriate redirect."
-//     developers = [davidestes:"David Estes", jleng: "Jeremy Leng"]
-// }
-
-
