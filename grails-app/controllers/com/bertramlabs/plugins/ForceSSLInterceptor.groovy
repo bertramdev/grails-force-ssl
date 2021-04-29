@@ -2,7 +2,9 @@ package com.bertramlabs.plugins
 
 import grails.core.GrailsApplication
 import org.grails.web.util.GrailsApplicationAttributes
+import groovy.util.logging.Slf4j
 
+@Slf4j
 class ForceSSLInterceptor {
 	GrailsApplication grailsApplication
 

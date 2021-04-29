@@ -13,7 +13,7 @@ buildscript {
 }
 
 
-version "4.0.0"
+version "4.0.1"
 group "com.bertramlabs.plugins"
 
 apply plugin: "org.grails.grails-plugin"
