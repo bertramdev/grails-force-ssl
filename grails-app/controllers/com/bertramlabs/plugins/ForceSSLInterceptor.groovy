@@ -19,7 +19,7 @@ class ForceSSLInterceptor {
 		Integer sslPort = grailsApplication.config.getProperty('grails.plugin.forceSSL.sslPort',Integer,null)
 		Map interceptUrlMap = grailsApplication.config.getProperty('grails.plugin.forceSSL.interceptUrlMap',Map,null)
 		if(!enabled) {
-			return false
+			return true
 		}
 		def controller = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
 
