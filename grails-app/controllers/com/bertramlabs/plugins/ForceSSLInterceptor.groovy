@@ -15,12 +15,11 @@ class ForceSSLInterceptor {
 	}
 
 	boolean before() { 
-		if(grailsApplication.config.grails.plugin.forceSSL.enabled instanceof Closure) {
-			if (!grailsApplication.config.grails.plugin.forceSSL.enabled(request)) {
-					return true
-			}
-		} else if(grailsApplication.config.grails.plugin.forceSSL.enabled == false ) {
-				return true
+		Boolean enabled = grailsApplication.config.getProperty('grails.plugin.forceSSL.enabled',Boolean,false)
+		Integer sslPort = grailsApplication.config.getProperty('grails.plugin.forceSSL.sslPort',Integer,null)
+		Map interceptUrlMap = grailsApplication.config.getProperty('grails.plugin.forceSSL.interceptUrlMap',Map,null)
+		if(!enabled) {
+			return false
 		}
 		def controller = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
 
@@ -33,7 +32,7 @@ class ForceSSLInterceptor {
 		def annotation = method?.getAnnotation(SSLRequired) ?: controller.clazz.getAnnotation(SSLRequired)
 		
 		if(!annotation) {
-			if(!grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap ||  grailsApplication.config.grails.plugin.forceSSL.interceptUrlMap[request.requestURI] != true) {
+			if(!interceptUrlMap ||  interceptUrlMap[request.requestURI] != true) {
 				return true
 			}
 		}
@@ -44,8 +43,8 @@ class ForceSSLInterceptor {
 			flash.keySet().each { key ->
 					flash[key] = flash[key]
 			}
-			if(grailsApplication.config.grails.plugin.forceSSL.sslPort) {
-				redirect url: "https://${request.serverName}:${grailsApplication.config.grails.plugin.forceSSL.sslPort}${request.requestURI}"
+			if(sslPort) {
+				redirect url: "https://${request.serverName}:${sslPort}${request.requestURI}"
             } else {
                 redirect url: "https://${request.serverName}${request.requestURI}"
             }

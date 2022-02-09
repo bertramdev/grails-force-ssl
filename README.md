@@ -21,16 +21,7 @@ grails:
             enabled: true
 ```
 
-The enabled flag can also be defined as a closure which will get passed the request attribute. This allows for evaluation on a per requeset level as to wether or not SSL should be enforced. Can be rather useful for disabling forced SSL for certain URL endpoints (for example server endpoints not behind a load balancer).
 
-```groovy
-grails.plugin.forceSSL.enabled = { request ->
-  if(request.serverName == 'app1.bertramlabs.com') {
-    return false
-  }
-  return true
-}
-```
 
 It is also possible to override the https port for the redirect if you want to via:
 
